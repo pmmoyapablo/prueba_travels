@@ -1,0 +1,18 @@
+Las logicas de Casos de Usos de la Solucion esta en la clase src/Aplicacion/AplicacionMain.cs del codigo fuente en la carpeta src/ que es el punto de aplicación donde se implmentan los casos de usos siguientes:
+
+CU ListarVehiculos();
+
+CU ConsignarDatosCliente();
+
+CU DefinirPreferencias();
+
+CU ReservarVehiculo();
+
+CU ActualizarReserva();
+
+CU ConsultarItinerarios();
+
+CU ListarAlgunasReservas();
+
+
+La aplicación esta hecha con el Patron de diseño Hexagonal (Puerto y Adaptadores) cumpliendo algunos principios SOLID como inyección de dependencias y segregación de interfaces.

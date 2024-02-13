@@ -1,0 +1,5 @@
+A) SELECT Count(*) as NumPersonas FROM Itinerarios WHERE Monto > 1000.00 GROUP BY ClientId;
+B) SELECT Documento, nombres FROM Clientes INNER JOIN Reservas ON Reservas.ClienteID = Clientes.Id AND Clientes.Ciudad = 'Bogotá' AND Clientes.Edad > 40;
+C) SELECT * FROM Reservas WHERE MedioPagoId = 3;
+D) SELECT * FROM Reservas WHERE IsPagoDestino = 1;
+E) SELECT * FROM Reservas WHERE Estatus = 2 OR Estatus = 4;
