@@ -7,6 +7,7 @@ Solución de intención compuesta por un Backend Apis REST en .NET Core 7 (En la
 # Build con Dotnet
 
 cd src/
+
 dotnet build
 
 # Run con Dotnet
