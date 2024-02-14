@@ -19,4 +19,4 @@ dotnet run
 https://localhost:58930/Swagger/index.html
 
 
-NOTA: El motor de BD es con un SQL en Memoria.
+NOTA: El motor de BD es con un SQL en Memoria. Aun hay detalles de ejecución por tipos de datos.
