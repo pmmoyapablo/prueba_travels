@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "l6DMFYSyY02Mqz86KGCZRD1WNKv048SquYpZ53y97WCXnux0CNDPNr8ocVkif6yFlboIT9C7Utjhqpg6H0A8kg==",
+  "dgSpecHash": "XxGIkFBOPce8xQWUufXS1rFJ6zSGtN1NfQDP9JhQnW2hxDW2iQCO7Uf18iu7z3lfmQ5eP5+ag4SnXq88cN2zBw==",
   "success": true,
   "projectFilePath": "C:\\Users\\pmmoy\\source\\repos\\PruebaBrowserTravel\\src\\api_travel.csproj",
   "expectedPackageFiles": [
@@ -15,7 +15,7 @@
     "C:\\Users\\pmmoy\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.2\\microsoft.entityframeworkcore.abstractions.7.0.2.nupkg.sha512",
     "C:\\Users\\pmmoy\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.2\\microsoft.entityframeworkcore.analyzers.7.0.2.nupkg.sha512",
     "C:\\Users\\pmmoy\\.nuget\\packages\\microsoft.entityframeworkcore.design\\7.0.2\\microsoft.entityframeworkcore.design.7.0.2.nupkg.sha512",
-    "C:\\Users\\pmmoy\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\6.0.0\\microsoft.entityframeworkcore.inmemory.6.0.0.nupkg.sha512",
+    "C:\\Users\\pmmoy\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\7.0.2\\microsoft.entityframeworkcore.inmemory.7.0.2.nupkg.sha512",
     "C:\\Users\\pmmoy\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.2\\microsoft.entityframeworkcore.relational.7.0.2.nupkg.sha512",
     "C:\\Users\\pmmoy\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\7.0.2\\microsoft.entityframeworkcore.sqlserver.7.0.2.nupkg.sha512",
     "C:\\Users\\pmmoy\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\7.0.2\\microsoft.entityframeworkcore.tools.7.0.2.nupkg.sha512",

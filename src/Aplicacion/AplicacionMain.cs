@@ -7,10 +7,7 @@
 ///////////////////////////////////////////////////////////
 
 
-using Azure;
 using Dominio;
-using Infraestructura;
-using System;
 
 namespace Aplicacion {
 	public class AplicacionMain {
@@ -59,26 +56,25 @@ namespace Aplicacion {
 
 		/// 
 		/// <param name="cliente"></param>
-		public Repuesta<int> ConsignarDatosCliente(Cliente cliente){
+		public Repuesta<Cliente> ConsignarDatosCliente(ClienteDto dto){
 
-      var response = new Repuesta<int>();
+      var response = new Repuesta<Cliente>();
       try
       {
         //Validate on Domain
         var clientePersiter = new Cliente();
-				clientePersiter.Id = cliente.Id;
-        clientePersiter.Nombres = cliente.Nombres;
-        clientePersiter.Documento = cliente.Documento;
-        clientePersiter.Edad = cliente.Edad;
-        clientePersiter.Direccion = cliente.Direccion;
-        clientePersiter.Ciudad = cliente.Ciudad;
-        clientePersiter.Email = cliente.Email;
-        clientePersiter.Telefono = cliente.Telefono;
+        clientePersiter.Nombres = dto.Nombres;
+        clientePersiter.Documento = dto.Documento;
+        clientePersiter.Edad = dto.Edad;
+        clientePersiter.Direccion = dto.Direccion;
+        clientePersiter.Ciudad = dto.Ciudad;
+        clientePersiter.Email = dto.Email;
+        clientePersiter.Telefono = dto.Telefono;
 
         //Persitencia
         _clienteRepositorio.Crear(clientePersiter);
 
-        response.Dato = 200;
+        response.Dato = clientePersiter;
         response.IsValida = true;
         response.Mensaje = "Registro Exitoso!!!";
 
@@ -92,27 +88,27 @@ namespace Aplicacion {
 
 		/// 
 		/// <param name="vehiculos"></param>
-		public Repuesta<int> DefinirPreferencias(String clienteId, Vehiculo[] vehiculos){
+		public Repuesta<int> DefinirPreferencias(PreferenciasDto dto){
 
       var response = new Repuesta<int>();
       try
       {
 
         //Busqueda
-        var cliente = _clienteRepositorio.Detallar(clienteId);
+        var cliente = _clienteRepositorio.Detallar(dto.ClienteId);
 
         if (cliente == null)
         {
           response.Dato = 400;
           response.IsValida = false;
-          response.Mensaje = "No se encontro el cliente con el identidicador: " + clienteId;
+          response.Mensaje = "No se encontro el cliente con el identidicador: " + dto.ClienteId;
         }
         else
         {
-          cliente.Preferencias = vehiculos;
-          response.Dato = 200;
+          cliente.UpdatePreferencias(dto.Vehiculos);
+          response.Dato = 203;
           response.IsValida = true;
-          response.Mensaje = "Consulta Exitosa!!!";
+          response.Mensaje = "Actualización Exitosa!!!";
         }
 
       }
@@ -127,25 +123,25 @@ namespace Aplicacion {
 		/// <param name="mediosPagos"></param>
 		/// <param name="vehiculo"></param>
 		/// <param name="cliente"></param>
-		public Repuesta<Reserva> ReservarVehiculo(Vehiculo vehiculo, Cliente cliente, MedioPago medioPago, DateTime desde, DateTime hasta)
+		public Repuesta<Reserva> ReservarVehiculo(ReservaDto dto)
     {
       var response = new Repuesta<Reserva>();
       try
       {
         //Validate on Domain
         var newReserva = new Reserva();
-        vehiculo.IsDisponible = false;
-        newReserva.VehiculoInv = vehiculo;
-        newReserva.ClienteInv = cliente;
-        newReserva.Pago = medioPago;
-        newReserva.FechaInicio = desde;
-        newReserva.FechaFin = hasta;
+        dto.Vehiculo.IsDisponible = false;
+        newReserva.VehiculoInv = dto.Vehiculo;
+        newReserva.ClienteInv = dto.Cliente;
+        newReserva.Pago = dto.Pago;
+        newReserva.FechaInicio = dto.FechaInicio;
+        newReserva.FechaFin = dto.FechaFin;
         newReserva.Estatus = (int)EstadosReserva.Iniciada;
         newReserva.CalcularMonto();
 
         //Persitencia
         _reservaRepositorio.Crear(newReserva);
-        _vehiculoRepositorio.Actualizar(vehiculo, vehiculo.Id);
+        _vehiculoRepositorio.Actualizar(dto.Vehiculo, dto.Vehiculo.Id);
 
         response.Dato = newReserva;
         response.IsValida = true;
@@ -161,7 +157,7 @@ namespace Aplicacion {
 
 		/// 
 		/// <param name="reserva"></param>
-		public Repuesta<int> ActualizarReserva(String reservaId,  Reserva reserva){
+		public Repuesta<int> ActualizarReserva(String reservaId,  int estatus){
 
       var response = new Repuesta<int>();
       try
@@ -177,7 +173,7 @@ namespace Aplicacion {
         }
         else
         {
-          reservaRecord.Estatus = reserva.Estatus;
+          reservaRecord.Estatus = estatus;
 
           response.Dato = 203;
           response.IsValida = true;
@@ -229,16 +225,11 @@ namespace Aplicacion {
 
             itinerarios.Add(itinerario);
           }
-        }
 
-        response.Dato = itinerarios.ToArray();
-
-        if (response.Dato != null)
-        {
+          response.Dato = itinerarios.ToArray();
           response.IsValida = true;
           response.Mensaje = "Consulta Exitosa!!!";
-        }
-
+        }          
       }
       catch (Exception ex)
       {

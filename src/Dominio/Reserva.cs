@@ -6,8 +6,6 @@
 //  Original author: pmmoy
 ///////////////////////////////////////////////////////////
 
-using System;
-using System.Diagnostics;
 
 namespace Dominio {
 	public class Reserva : Entidad {
@@ -20,14 +18,18 @@ namespace Dominio {
     private int estatus;
     private MedioPago pago;
 
-    public Cliente ClienteInv { get => clienteInv; set { ExcepcionDominio.LanzarCuando(value == null, "Cliente inválido"); clienteInv = value; } }
-    public Vehiculo VehiculoInv { get => vehiculoInv; set { ExcepcionDominio.LanzarCuando(value == null, "Vehiculo inválido"); vehiculoInv = value; } }
+    public string ClienteId { get; set; }
+    public string PagoId { get; set; }
+    public string VehiculoId { get; set; }
+
+    public Cliente ClienteInv { get => clienteInv; set { ExcepcionDominio.LanzarCuando(value == null, "Cliente inválido"); clienteInv = value; ClienteId = clienteInv.Id; } }
+    public Vehiculo VehiculoInv { get => vehiculoInv; set { ExcepcionDominio.LanzarCuando(value == null, "Vehiculo inválido"); vehiculoInv = value; VehiculoId = vehiculoInv.Id; } }
     public DateTime FechaInicio { get => fechaInicio; set { ExcepcionDominio.LanzarCuando(value < DateTime.Now, "Fecha Inicio inválida"); fechaInicio = value; } }
     public DateTime FechaFin { get => fechaFin; set { ExcepcionDominio.LanzarCuando(value < DateTime.Now.AddDays(1), "Fecha Fin inválida"); fechaFin = value; } }
     public double MontoTotal { get => montoTotal; set { ExcepcionDominio.LanzarCuando(value < 0.00, "Monto Total inválido"); montoTotal = value; } }
     public int Estatus { get => estatus; set { ExcepcionDominio.LanzarCuando(value > (int)EstadosReserva.Anulada && value < 0, "Estatus inválido"); estatus = value; } }
     public bool PagoDestino { get; set;  }
-		public MedioPago Pago { get => pago; set { ExcepcionDominio.LanzarCuando(value == null, "Medio de Pago inválido"); pago = value; } }
+		public MedioPago Pago { get => pago; set { ExcepcionDominio.LanzarCuando(value == null, "Medio de Pago inválido"); pago = value; PagoId = pago.Id; } }
 
     public Reserva(){
 

@@ -10,7 +10,9 @@
 
 namespace Dominio {
   public class MedioPago : Entidad {
-    public String Descripcion { get => Descripcion; set { ExcepcionDominio.LanzarCuando(string.IsNullOrEmpty(value), "Descripción inválida"); Descripcion = value; } }
+
+    private String descripcion;
+    public String Descripcion { get => descripcion; set { ExcepcionDominio.LanzarCuando(string.IsNullOrEmpty(value), "Descripción inválida"); descripcion = value; } }
     public MedioPago(){
     }
 

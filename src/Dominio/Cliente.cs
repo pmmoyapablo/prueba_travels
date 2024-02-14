@@ -9,23 +9,36 @@
 
 namespace Dominio {
 
-using Dominio;
   public class Cliente : Entidad {
 
-		public String Documento { get => Documento; set { ExcepcionDominio.LanzarCuando(string.IsNullOrEmpty(value), "Documento inválido"); Documento = value; } }
-		public String Nombres { get => Nombres; set { ExcepcionDominio.LanzarCuando(string.IsNullOrEmpty(value), "Nombres inválidos"); Nombres = value; } }
-    public int Edad { get => Edad; set { ExcepcionDominio.LanzarCuando(value < 18, "Edad no permitida"); Edad = value; } }
-    public String Email { get => Email; set { ExcepcionDominio.LanzarCuando(string.IsNullOrEmpty(value), "Email inválido"); Email = value; } }
-    public String Direccion { get => Direccion; set { ExcepcionDominio.LanzarCuando(string.IsNullOrEmpty(value), "Dirección inválida"); Direccion = value; } }
-    public String Ciudad { get => Ciudad; set { ExcepcionDominio.LanzarCuando(string.IsNullOrEmpty(value), "Ciudad inválida"); Ciudad = value; } }
-    public String Telefono { get => Telefono; set { ExcepcionDominio.LanzarCuando(string.IsNullOrEmpty(value), "Teléfono inválido"); Telefono = value; } }
+    private String documento;
+    private String nombres;
+    private int edad;
+    private String email;
+    private String direccion;
+    private String ciudad;
+    private String telefono;
 
-    public Vehiculo[] Preferencias { get; set; }
+    public String Documento { get => documento; set { ExcepcionDominio.LanzarCuando(string.IsNullOrEmpty(value), "Documento inválido"); documento = value; } }
+		public String Nombres { get => nombres; set { ExcepcionDominio.LanzarCuando(string.IsNullOrEmpty(value), "Nombres inválidos"); nombres = value; } }
+    public int Edad { get => edad; set { ExcepcionDominio.LanzarCuando(value < 18, "Edad no permitida"); edad = value; } }
+    public String Email { get => email; set { ExcepcionDominio.LanzarCuando(string.IsNullOrEmpty(value), "Email inválido"); email = value; } }
+    public String Direccion { get => direccion; set { ExcepcionDominio.LanzarCuando(string.IsNullOrEmpty(value), "Dirección inválida"); direccion = value; } }
+    public String Ciudad { get => ciudad; set { ExcepcionDominio.LanzarCuando(string.IsNullOrEmpty(value), "Ciudad inválida"); ciudad = value; } }
+    public String Telefono { get => telefono; set { ExcepcionDominio.LanzarCuando(string.IsNullOrEmpty(value), "Teléfono inválido"); telefono = value; } }
+
+    private Vehiculo[] Preferencias { get; set; }
 
 		public Cliente(){
       Preferencias = new Vehiculo[] { };
 		}
 
-	}//end Cliente
+    public void UpdatePreferencias(Vehiculo[] preferencias) {  
+      Preferencias = preferencias; 
+    }
+
+    public Vehiculo[] GetPreferencias() { return Preferencias; }
+
+  }//end Cliente
 
 }//end namespace Dominio

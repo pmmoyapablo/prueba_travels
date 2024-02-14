@@ -74,7 +74,7 @@ app.MapGet("/reservas/{estatus}", (AplicacionMain aplicacion, [FromRoute] int es
 
   return Results.Ok(response);
 });
-/*
+
 app.MapGet("/itinerarios/{clienteId}/{desde}/{hasta}", (AplicacionMain aplicacion, [FromRoute] string clienteId, [FromRoute] string desde, [FromRoute] string hasta) =>{
 
   var response = aplicacion.ConsultarItinerarios(clienteId, Convert.ToDateTime(desde), Convert.ToDateTime(hasta));
@@ -84,9 +84,9 @@ app.MapGet("/itinerarios/{clienteId}/{desde}/{hasta}", (AplicacionMain aplicacio
 
   return Results.Ok(response);
 });
-*/
 
-app.MapPost("/cliente", (AplicacionMain aplicacion, [FromBody] Cliente dto )=>{
+
+app.MapPost("/cliente", (AplicacionMain aplicacion, [FromBody] ClienteDto dto )=>{
  
   var response = aplicacion.ConsignarDatosCliente(dto);
    
@@ -95,10 +95,20 @@ app.MapPost("/cliente", (AplicacionMain aplicacion, [FromBody] Cliente dto )=>{
 
   return Results.Ok(response);
 });
-/*
-app.MapPost("/preferencias", (AplicacionMain aplicacion, [FromBody] string clienteId, [FromBody] Vehiculo[] dtos) => {
 
-  var response = aplicacion.DefinirPreferencias(clienteId, dtos);
+app.MapPost("/preferencias", (AplicacionMain aplicacion, [FromBody] PreferenciasDto dto) => {
+
+  var response = aplicacion.DefinirPreferencias(dto);
+
+  if (!response.IsValida)
+    return Results.NotFound(response);
+
+  return Results.Ok(response);
+});
+
+app.MapPost("/reserva", (AplicacionMain aplicacion, [FromBody] ReservaDto dto) => {
+
+  var response = aplicacion.ReservarVehiculo(dto);
 
   if (!response.IsValida)
     return Results.NotFound(response);
@@ -106,19 +116,9 @@ app.MapPost("/preferencias", (AplicacionMain aplicacion, [FromBody] string clien
   return Results.Ok(response);
 });
 
-app.MapPost("/reserva", (AplicacionMain aplicacion, [FromBody] Cliente cliDto, [FromBody] Vehiculo vehDto, [FromBody] MedioPago pagoDto, [FromRoute] string desde, [FromRoute] string hasta) => {
+app.MapPut("/reserva/{id}", (AplicacionMain aplicacion, [FromRoute] string id,  [FromBody] int  newEstatus) => {
 
-  var response = aplicacion.ReservarVehiculo(vehDto, cliDto, pagoDto, Convert.ToDateTime(desde), Convert.ToDateTime(hasta));
-
-  if (!response.IsValida)
-    return Results.NotFound(response);
-
-  return Results.Ok(response);
-});
-*/
-app.MapPut("/reserva/{id}", (AplicacionMain aplicacion, [FromRoute] string id,  [FromBody] Reserva reservaDto) => {
-
-  var response = aplicacion.ActualizarReserva(id,reservaDto);
+  var response = aplicacion.ActualizarReserva(id, newEstatus);
 
   if (!response.IsValida)
     return Results.NotFound(response);
